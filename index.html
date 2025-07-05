@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Eco Brutalism</title>
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h3>.my future homesteading.</h3>
+            <h1>
+                An eco-brutalist home
+            </h1>
+            <h2>combining nature and modernity</h2>
+        </header>
+        <main>
+                  <section class="grid grid-2-col">
+          <div>
+            <img
+              src="https://hommes.studio/wp-content/uploads/3-23.jpg"
+              class="img-responsive fx-reveal"
+              loading="lazy"
+            />
+          </div>
+          <div>
+            <h2 class="fx-reveal">blending concrete with greenery</h2>
+            <h3 class="fx-reveal">what is eco-brutalism?</h3>
+            <p  class="fx-reveal">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint facilis beatae eveniet necessitatibus. Consequuntur itaque, placeat quo, enim maiores nemo officia necessitatibus soluta saepe facere nesciunt magnam voluptatum, vitae et!
+            </p>
+            <br />
+            <p  class="fx-reveal">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur animi harum ipsum reprehenderit officia exercitationem magni tempora quo. Sint, vitae repudiandae ad eum aliquid vel. Cupiditate deserunt nostrum veniam. Ipsa?
+            </p>
+          </div>
+        </section>
+        </main>
+        <footer></footer>
+    </div>
+   <script>
+    const ratio = 0.1;
+const options = {
+  root: null,
+  rootMargin: '0px',
+  threshold: ratio
+}
+
+function handleIntersect(entries, observer) {
+  entries.forEach(function(entry) {
+    if(entry.intersectionRatio > ratio) {
+      entry.target.classList.add('fx-reveal-visible')
+      observer.unobserve(entry.target);
+    }
+  })
+}
+
+const observer = new IntersectionObserver(handleIntersect, options);
+
+document.querySelectorAll('.fx-reveal').forEach(function(r) {
+  observer.observe(r);
+});
+   </script> 
+</body>
+</html>
