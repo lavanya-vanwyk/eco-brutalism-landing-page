@@ -141,7 +141,14 @@ main p {
   --_i: 10%;
   filter: grayscale(0);
 }
-
+.gallery-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.gallery {
+  width: 200px;
+  
+}
 footer {
   color: white;
   background-image: 

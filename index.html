@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.10.0/dist/axios.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lekton:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -62,62 +63,104 @@
             />
           </div>
         </section>
-        </main>
-              <footer>
-        <section class="grid grid-3-col-narrow">
-          <div>
-            <h3>Resources</h3>
-            <ul>
-              <li>
-                <a
-                  href="https://industrialkonzept.com/blogs/editorial/eco-brutalism?srsltid=AfmBOoqh5jgGnK-FORbe5aojuqlydPr4n4bAgAe9FLtJoFux8qzYeKKj"
-                  target="_blank"
-                  >overview of eco-brutalism</a
-                >
-              </li>
-              
-              <li>
-                <a
-                  href="https://kavigupta.com/artists/39-mary-sibande/"
-                  target="_blank"
-                  >eco-brutalist architecture</a
-                >
-              </li>
-              <li>
-                <a
-                  href="https://www.amazon.co.za/Brutalist-Plants-Olivia-Broome/dp/1914314484"
-                  target="_blank"
-                  >photo-book on eco-brutalism</a
-                >
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3>About me</h3>
-            <p>
-              Versatile junior web dev and designer skilled in a range of creative disciplines,
-              including UI/UX design, digital asset creation, and illustration. <br>
-              Currently pursuing short courses to expand
-              my technical expertise.
-            </p>
-          </div>
-          <div>
-            <h3>About this website</h3>
-            <p>
-              This project was coded by Lavanya van Wyk and is
-              <a
-                href="https://github.com/lavanya-vanwyk/eco-brutalism-landing-page"
-                target="_blank"
-              >
-                open sourced</a
-              >
-            </p>
-          </div>
+        <section>
+            <button id="generate-btn">Generate Gallery</button>
+            <div id="gallery-element">
+                <div id="gallery-container"></div>
+            </div>
         </section>
-      </footer>
+        </main>
+        <footer>
+            <section class="grid grid-3-col-narrow">
+            <div>
+                <h3>Resources</h3>
+                <ul>
+                <li>
+                    <a
+                    href="https://industrialkonzept.com/blogs/editorial/eco-brutalism?srsltid=AfmBOoqh5jgGnK-FORbe5aojuqlydPr4n4bAgAe9FLtJoFux8qzYeKKj"
+                    target="_blank"
+                    >overview of eco-brutalism</a
+                    >
+                </li>
+                
+                <li>
+                    <a
+                    href="https://kavigupta.com/artists/39-mary-sibande/"
+                    target="_blank"
+                    >eco-brutalist architecture</a
+                    >
+                </li>
+                <li>
+                    <a
+                    href="https://www.amazon.co.za/Brutalist-Plants-Olivia-Broome/dp/1914314484"
+                    target="_blank"
+                    >photo-book on eco-brutalism</a
+                    >
+                </li>
+                </ul>
+            </div>
+            <div>
+                <h3>About me</h3>
+                <p>
+                Versatile junior web dev and designer skilled in a range of creative disciplines,
+                including UI/UX design, digital asset creation, and illustration. <br>
+                Currently pursuing short courses to expand
+                my technical expertise.
+                </p>
+            </div>
+            <div>
+                <h3>About this website</h3>
+                <p>
+                This project was coded by Lavanya van Wyk and is
+                <a
+                    href="https://github.com/lavanya-vanwyk/eco-brutalism-landing-page"
+                    target="_blank"
+                >
+                    open sourced</a
+                >
+                </p>
+            </div>
+            </section>
+        </footer>
     </div>
    <script>
 
+        function generateImages (event) {
+    event.preventDefault();
+    let apiKey ="2ec5a180t946o0ff04daaefa18395bb9";
+    let apiURL = `https://api.shecodes.io/images/v1/search?query=modernist+architecture&key=${apiKey}`;
+
+    let galleryElement = document.querySelector("#gallery-element");
+    
+    galleryElement.innerHTML = 
+    `
+    <div id="gallery-container"></div>
+    `;
+
+    axios.get(apiURL).then(displayImages)
+    
+}
+
+function displayImages(response) {
+    console.log(response.data.photos)
+  
+  response.data.photos.forEach(photo => {
+  const galleryContainer = document.getElementById('gallery-container')
+  const img = document.createElement('img');
+  img.src = photo.src.portrait; 
+  img.alt = 'Photo';
+  img.classList.add('img-fx')
+  img.classList.add('gallery')
+  galleryContainer.appendChild(img);
+  observer.observe(img);
+
+})
+}
+document.addEventListener("DOMContentLoaded", function() {
+    let btnElement = document.querySelector("#generate-btn");
+    btnElement.addEventListener("click", generateImages);
+    });
+    // Scroll animation
     const ratio = 0.1;
     const options = {
     root: null,
@@ -143,6 +186,10 @@
     document.querySelectorAll('.fx-reveal, .img-fx').forEach(function(r) {
     observer.observe(r);
     });
+    
+
+
+
    </script> 
 </body>
 </html>
