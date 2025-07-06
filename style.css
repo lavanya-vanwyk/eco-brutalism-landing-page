@@ -124,7 +124,22 @@ main p {
   padding: 15px;
 }
 
-.img-fx {
+.img-fx{
+  max-width: 100%;
+  border-radius: 5px;
+  --_g: 10%/43% 43% no-repeat conic-gradient(#000 0 0);
+  mask: 
+    left   var(--_i,) top    var(--_g),
+    bottom var(--_i,) left   var(--_g),
+    top    var(--_i,) right  var(--_g),
+    right  var(--_i,) bottom var(--_g);
+  filter: grayscale();
+  transition: 1s linear;
+  cursor: pointer;
+}
+
+
+.img-fx-g {
   max-width: 100%;
   border-radius: 5px;
   --_g: 10%/45% 45% no-repeat conic-gradient(#000 0 0);
@@ -134,20 +149,41 @@ main p {
     top    var(--_i,) right  var(--_g),
     right  var(--_i,) bottom var(--_g);
   filter: grayscale();
-  transition: .3s linear;
+  transition: 900ms linear;
   cursor: pointer;
 }
 .img-fx-visible {
   --_i: 10%;
   filter: grayscale(0);
 }
+
 .gallery-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
 .gallery {
   width: 200px;
-  
+}
+
+.generate-gallery-btn {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+  color: white;
+  padding: 16px 32px;
+  margin-top: 32px;
+  display: inline-block;
+  letter-spacing: 3px;
+  text-decoration: none;
+  text-transform: uppercase;
+  background: var(--primary-color);
+  border-radius: 5px;
+  transition: 300ms ease-in-out;
+}
+.generate-gallery-btn:hover{
+  background-color: white;
+  color: var(--primary-color);
 }
 footer {
   color: white;

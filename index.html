@@ -64,9 +64,10 @@
           </div>
         </section>
         <section>
-            <button id="generate-btn">Generate Gallery</button>
+            <h2 class="fx-reveal">more examples of eco-brutalism</h2>
+            <h3 class="fx-reveal">green architecture gallery</h3>
+            <a id="generate-btn" class="generate-gallery-btn">Generate Gallery</a>
             <div id="gallery-element">
-                <div id="gallery-container"></div>
             </div>
         </section>
         </main>
@@ -125,70 +126,69 @@
     </div>
    <script>
 
-        function generateImages (event) {
-    event.preventDefault();
-    let apiKey ="2ec5a180t946o0ff04daaefa18395bb9";
-    let apiURL = `https://api.shecodes.io/images/v1/search?query=modernist+architecture&key=${apiKey}`;
+    function generateImages (event) {
+        event.preventDefault();
+        let apiKey ="2ec5a180t946o0ff04daaefa18395bb9";
+        let apiURL = `https://api.shecodes.io/images/v1/search?query=green+architecture&key=${apiKey}`;
 
-    let galleryElement = document.querySelector("#gallery-element");
-    
-    galleryElement.innerHTML = 
-    `
-    <div id="gallery-container"></div>
-    `;
+        let galleryElement = document.querySelector("#gallery-element");
+        
+        galleryElement.innerHTML = 
+        `<div id="gallery-container"></div>`;
 
-    axios.get(apiURL).then(displayImages)
-    
+        axios.get(apiURL).then(displayImages)
 }
 
-function displayImages(response) {
-    console.log(response.data.photos)
-  
-  response.data.photos.forEach(photo => {
-  const galleryContainer = document.getElementById('gallery-container')
-  const img = document.createElement('img');
-  img.src = photo.src.portrait; 
-  img.alt = 'Photo';
-  img.classList.add('img-fx')
-  img.classList.add('gallery')
-  galleryContainer.appendChild(img);
-  observer.observe(img);
+    function displayImages(response) {
+        console.log(response.data.photos)
+    
+        const includedPhotos = response.data.photos.slice(0, 7) //limits number of photos
+        
+        includedPhotos.forEach(photo => {
+            const galleryContainer = document.getElementById('gallery-container')
+            const img = document.createElement('img');
+            img.src = photo.src.portrait; 
+            img.alt = 'Photo';
+            img.classList.add('img-fx-g')
+            img.classList.add('gallery')
+            galleryContainer.appendChild(img);
+            observer.observe(img);
 
-})
-}
-document.addEventListener("DOMContentLoaded", function() {
-    let btnElement = document.querySelector("#generate-btn");
-    btnElement.addEventListener("click", generateImages);
-    });
-    // Scroll animation
+    })
+    }
+    document.addEventListener("DOMContentLoaded", function() {
+        let btnElement = document.querySelector("#generate-btn");
+        btnElement.addEventListener("click", generateImages);
+        });
+
+    // document observer methods
     const ratio = 0.1;
     const options = {
-    root: null,
-    rootMargin: '0px',
-    threshold: ratio
+        root: null,
+        rootMargin: '0px',
+        threshold: ratio
     }
 
     function handleIntersect(entries, observer) {
-    entries.forEach(function(entry) {
-        if(entry.intersectionRatio > ratio) {
-        if (entry.target.classList.contains('fx-reveal')) {
-            entry.target.classList.add('fx-reveal-visible');
-        } else if (entry.target.classList.contains('img-fx')) {
-            entry.target.classList.add('img-fx-visible');
-        }
-        observer.unobserve(entry.target);
-        }
-    });
+        entries.forEach(function(entry) {
+            if(entry.intersectionRatio > ratio) {
+                if (entry.target.classList.contains('fx-reveal')) {
+                    entry.target.classList.add('fx-reveal-visible');
+                } else if (entry.target.classList.contains('img-fx')) {
+                    entry.target.classList.add('img-fx-visible');
+                } else if (entry.target.classList.contains('img-fx-g')) {
+                    entry.target.classList.add('img-fx-visible');
+                }
+                observer.unobserve(entry.target);
+            }
+        });
     }
 
     const observer = new IntersectionObserver(handleIntersect, options);
 
-    document.querySelectorAll('.fx-reveal, .img-fx').forEach(function(r) {
+    document.querySelectorAll('.fx-reveal, .img-fx, .img-fx-g').forEach(function(r) {
     observer.observe(r);
     });
-    
-
-
 
    </script> 
 </body>
