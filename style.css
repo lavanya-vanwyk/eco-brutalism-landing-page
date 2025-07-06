@@ -1,11 +1,22 @@
+:root {
+  --primary-color: hsl(108, 13%, 11%);
+  --secondary-color: hsl(85, 18%, 8%);
+  --tertiary-color: #272044;
+  --main-heading: #5f0d0d;
+  --sub-heading: #B3BEC2;
+}
+
 .app-container {
   max-width: 1400px;
   margin: 0 auto;
-  background-color: whitesmoke;
+  padding: 40px;
+  background-color: var(--primary-color);
+
 }
 
 body {
-  background-color:hsl(85, 18%, 8%);
+  background-color: var(--secondary-color);
+  font-family: "Lekton", monospace;
 }
 
 .fx-reveal {
@@ -14,7 +25,7 @@ body {
 }
 .fx-reveal-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateX(0);
   transition: 1200ms cubic-bezier(0.5, 0, 0, 1);
 }
 header {
@@ -48,13 +59,13 @@ header h3 {
   line-height: 1.5;
   letter-spacing: 5px;
   margin: 0;
-  color:#B3BEC2;
+  color: var(--sub-heading);
 }
 
 .grid {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
-  grid-gap: 20px;
+  grid-gap: 5px;
 }
 .grid-2-col {
   grid-template-columns: 1fr 1fr;
@@ -69,16 +80,13 @@ section {
 main {
   background-color: white;
 }
-.img-responsive {
-  max-width: 100%;
-  border-radius: 5px;
-  margin-left: 10px;
-}
+
+
 main h2 {
   font-weight: 700;
   font-size: 16px;
   line-height: 1.5;
-  margin: 0;
+  margin: 15px;
   letter-spacing: 5px;
   opacity: 0.6;
   color:#B3BEC2;
@@ -89,8 +97,9 @@ main h3 {
   font-weight: 700;
   font-size: 40px;
   line-height: 1.5;
+   margin: 10px;
   color: var(--tertiary-color);
-  margin: 0;
+  
 }
 main h4 {
   font-weight: 700;
@@ -112,4 +121,11 @@ main p {
   font-size: 16px;
   line-height: 1.5;
   opacity: 0.7;
+  text-align: justify;
+  padding: 15px;
+}
+
+.img-responsive {
+  max-width: 100%;
+  border-radius: 5px;
 }
