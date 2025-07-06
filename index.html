@@ -22,7 +22,7 @@
         <section class="grid grid-2-col">
             <img
               src="https://hommes.studio/wp-content/uploads/3-23.jpg"
-              class="img-responsive fx-reveal"
+              class="img-fx"
               loading="lazy"
             />
           <div>
@@ -30,15 +30,14 @@
             <h3 class="fx-reveal">what is eco-brutalism?</h3>
             <p  class="fx-reveal">
                 Brutalism itself can be considered a subset of the modernism style of architecture, but is often described as a reaction to the lightness and style of modernism,
-                popularised by 1940s atrists like Mies van der Rohe, or Le Corbusier. <br><br>
+                popularised by 1940s atrists like Mies van der Rohe, or Le Corbusier. <br>
+            </p>
+            <br />
+            <p class="fx-reveal">
                 Brutalist architecture is charaterised by its use of raw/exposed concrete, while drawing from modernist <br>
                 influence to let the materials speak for themselve, it has a less clean and polished aesthetic.
             </p>
-            <br />
-            <p  class="fx-reveal">
-             Eco-brutalism makes use of open spaces to encourage natural light and fills spaces with plants and greenery. <br>
-             The style attempts to create a more harmonious relationship between man-made and nature. <br>
-            </p>
+            
           </div>
         </section>
         <section class="grid grid-2-col">
@@ -51,42 +50,99 @@
             </p>
             <br />
             <p  class="fx-reveal">
-              <br>
+             Eco-brutalism makes use of open spaces to encourage natural light and fills spaces with plants and greenery. <br>
+             The style attempts to create a more harmonious relationship between man-made and nature. <br>
             </p>
           </div>
           <div>
             <img
               src="https://hommes.studio/wp-content/uploads/1-12.webp"
-              class="img-responsive fx-reveal"
+              class="img-fx"
               loading="lazy"
             />
           </div>
         </section>
         </main>
-        <footer></footer>
+              <footer>
+        <section class="grid grid-3-col-narrow">
+          <div>
+            <h3>Resources</h3>
+            <ul>
+              <li>
+                <a
+                  href="https://industrialkonzept.com/blogs/editorial/eco-brutalism?srsltid=AfmBOoqh5jgGnK-FORbe5aojuqlydPr4n4bAgAe9FLtJoFux8qzYeKKj"
+                  target="_blank"
+                  >overview of eco-brutalism</a
+                >
+              </li>
+              
+              <li>
+                <a
+                  href="https://kavigupta.com/artists/39-mary-sibande/"
+                  target="_blank"
+                  >eco-brutalist architecture</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://www.amazon.co.za/Brutalist-Plants-Olivia-Broome/dp/1914314484"
+                  target="_blank"
+                  >photo-book on eco-brutalism</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3>About me</h3>
+            <p>
+              Versatile junior web dev and designer skilled in a range of creative disciplines,
+              including UI/UX design, digital asset creation, and illustration. <br>
+              Currently pursuing short courses to expand
+              my technical expertise.
+            </p>
+          </div>
+          <div>
+            <h3>About this website</h3>
+            <p>
+              This project was coded by Lavanya van Wyk and is
+              <a
+                href="https://github.com/lavanya-vanwyk/eco-brutalism-landing-page"
+                target="_blank"
+              >
+                open sourced</a
+              >
+            </p>
+          </div>
+        </section>
+      </footer>
     </div>
    <script>
+
     const ratio = 0.1;
-const options = {
-  root: null,
-  rootMargin: '0px',
-  threshold: ratio
-}
-
-function handleIntersect(entries, observer) {
-  entries.forEach(function(entry) {
-    if(entry.intersectionRatio > ratio) {
-      entry.target.classList.add('fx-reveal-visible')
-      observer.unobserve(entry.target);
+    const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: ratio
     }
-  })
-}
 
-const observer = new IntersectionObserver(handleIntersect, options);
+    function handleIntersect(entries, observer) {
+    entries.forEach(function(entry) {
+        if(entry.intersectionRatio > ratio) {
+        if (entry.target.classList.contains('fx-reveal')) {
+            entry.target.classList.add('fx-reveal-visible');
+        } else if (entry.target.classList.contains('img-fx')) {
+            entry.target.classList.add('img-fx-visible');
+        }
+        observer.unobserve(entry.target);
+        }
+    });
+    }
 
-document.querySelectorAll('.fx-reveal').forEach(function(r) {
-  observer.observe(r);
-});
+    const observer = new IntersectionObserver(handleIntersect, options);
+
+    document.querySelectorAll('.fx-reveal, .img-fx').forEach(function(r) {
+    observer.observe(r);
+    });
    </script> 
 </body>
 </html>
